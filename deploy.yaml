@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: phasers-spreedly
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phasers-worksample-app
+  namespace: phasers-spreedly
+spec:
+  selector:
+    matchLabels:
+      app: spreedly
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: spreedly
+    spec:
+      containers:
+      - name: phasers-worksample-container
+        image: ${REPOSITORY_TAG}
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 0.25
+        env: # Adding environment variables here
+        - name: RAILS_ENV
+          value: "development"
+        - name: RAILS_SERVE_STATIC_FILES
+          value: "1"
+        - name: DATABASE_ADAPTER
+          value: "postgresql"
+        - name: DATABASE_NAME
+          value: "spreedly_phasers"
+        - name: DATABASE_TEST_NAME
+          value: "spreedly_phasers_test"
+        - name: DATABASE_USER
+          value: "root"
+        - name: DATABASE_PASSWORD
+          value: ""
+        - name: DATABASE_ENCODING
+          value: "unicode"
+        - name: CORE_ENVIRONMENT_KEY
+          value: "OB9909MNZj62u9U4VAz3lAAPZcp"
+        - name: CORE_ACCESS_SECRET
+          value: "MIMo7gJrSi3LnJGdRrOZeBBowXmDVE4zEgyHQS91tIqZiJ2oiy6PRt5XJVXG7hcz"
+        - name: CORE_DOMAIN
+          value: "https://core.spreedly.com"
+        - name: CORE_GATEWAY_FOR_CREDIT_CARD
+          value: "StuXzUJ5Khe3Wes31T0M4uNnjv9"
+        imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phasers-worksample-service
+  namespace: phasers-spreedly
+spec:
+  selector:
+    app: spreedly
+  ports:
+    - name: http
+      port: 80  # Change port from 3000 to 80
+      targetPort: 3000  # Map port 80 externally to port 3000 internally in the pod
+  type: ClusterIP

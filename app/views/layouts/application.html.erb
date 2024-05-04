@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= APP_NAME %></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag 'application' %>
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-default">
+      <nav class="container">
+        <div class="container">
+          <div class="navbar-header"><a href="/" class="navbar-brand">Home</a></div>
+          <ul class="nav navbar-nav">
+            <li>
+              <%= link_to "Buy Phasers", buy_phaser_url %>
+            </li>
+            <li>
+              <%= link_to "About", about_url %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <%= render '/layouts/messages' %>
+    <%= yield %>
+    <div class="container">
+      <hr/>
+      <footer>
+        <p>
+          <small>
+            © 2013 - 2024 <%= link_to "Spreedly", "https://spreedly.com" %> Corporation.  All rights reserved.
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
+

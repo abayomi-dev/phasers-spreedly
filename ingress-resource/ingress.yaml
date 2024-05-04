@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phasers-ingress
+  namespace: phasers-spreedly
+spec:
+  rules:
+  - host: phasers-spreedly.qa.arca-payments.network
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: phasers-worksample-service
+            port:
+              number: 80
