@@ -38,11 +38,11 @@ The ingress controller is NGINX based and it helps process the rules , while the
 ![Ingress Resource in the Kubernetes UI](https://github.com/wasp-networks/spreedly-phasers/blob/master/PNG's/Screenshot%202024-05-04%20at%2016.55.03.png)
 As seen in the picture we have the Kuberenetes UI(Lens) I am using for this test, show us that the service is mapped already to the appliation
 
-Of course you might wonder where the HTTPS comes into the fray, This is added in the ingress-controller file
-**HTTPS/Security and Code Scanning**
+Of course you might wonder where the HTTPS comes into the fray,</br> This is added in the ingress-controller file</br>
+**HTTPS/Security and Code Scanning**</br>
 `service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-west-1:164135465533:certificate/1bc10b99-a0e3-4d3a-aeac-c6c3e0b17978
-`
-This snippet shows us the portion at which the SSL cert is configured. We create a SAN or wildcard certificate and attach an ID possible AN ARN if we use AWS ACM for this provisioning and we will be able to work with the wildcarded domain name..
+`</br>
+This snippet shows us the portion at which the SSL cert is configured. We create a SAN or wildcard certificate and attach an ID possible AN ARN if we use AWS ACM for this provisioning and we will be able to work with the wildcarded domain name..</br>
 
 After this is done on the AWS console we map the URL in this case phasers-spreedly.qa.arca-payments.network to the Loadbalacer that was created.
 
